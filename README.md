@@ -23,4 +23,7 @@ After downloads all requirement, you can use smpl2bvh like this:
 `rotations` value is an array consisting of [fnum, 24, 3] and `trans` value is the root transition consisting of [fnum, 3]
 (fnum means frame number).  
 You can find bvh file as `output`.  
-For more information, plese refer to `smpl2bvh.py`.
+For more information, plese refer to `smpl2bvh.py`.  
+
+## Reference
+`bvh.py` and `quat.py` are based on [Motion Matching](https://github.com/orangeduck/Motion-Matching).
