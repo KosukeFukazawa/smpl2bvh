@@ -14,7 +14,7 @@ To install from PyPi simply run:
 ```
 
 ## How to use?
-After downloads all requirement, you can use smpl2bvh like this:
+After downloads all requirements, you can use smpl2bvh like this:
 ```python
     python smpl2bvh.py --gender MALE --poses data/poses.npz --fps 30 --output data/demo.bvh
 ```
