@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# SMPL Models
+data/smpl/smpl/SMPL_FEMALE.pkl
+data/smpl/smpl/SMPL_MALE.pkl
+data/smpl/smpl/SMPL_NEUTRAL.pkl
