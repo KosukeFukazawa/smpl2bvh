@@ -132,3 +132,10 @@ dmypy.json
 data/smpl/smpl/SMPL_FEMALE.pkl
 data/smpl/smpl/SMPL_MALE.pkl
 data/smpl/smpl/SMPL_NEUTRAL.pkl
+
+# Misc
+.DS_Store
+*.ipynb
+*.npz
+*.pkl
+*.bvh

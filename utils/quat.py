@@ -91,6 +91,14 @@ def fk(lrot, lpos, parents):
         
     return np.concatenate(gr, axis=-2), np.concatenate(gp, axis=-2)
 
+def fk_rot(lrot, parents):
+    
+    gr = [lrot[...,:1,:]]
+    for i in range(1, len(parents)):
+        gr.append(mul(gr[parents[i]], lrot[...,i:i+1,:]))
+        
+    return np.concatenate(gr, axis=-2)
+
 # Calculate local space rotations and positions from global space.
 def ik(grot, gpos, parents):
     
@@ -105,6 +113,12 @@ def ik(grot, gpos, parents):
                 inv(grot[...,parents[1:],:]),
                 gpos[...,1:,:] - gpos[...,parents[1:],:]),
         ], axis=-2))
+
+def ik_rot(grot, parents):
+    
+    return np.concatenate([grot[...,:1,:], 
+                        mul(inv(grot[...,parents[1:],:]), grot[...,1:,:]),
+                    ], axis=-2)
     
 def fk_vel(lrot, lpos, lvel, lang, parents):
     
@@ -148,11 +162,9 @@ def slerp(x, y, t):
     return x * np.cos(theta * t) + r * np.sin(theta * t)
 
 
-"""
-
-Calculate other rotations from other quaternions.
-
-"""
+###################################################
+# Calculate other rotations from other quaternions.
+################################################### 
 
 # Calculate euler angles from quaternions.
 def to_euler(x, order='zyx'):
@@ -231,11 +243,9 @@ def to_scaled_angle_axis(x, eps=1e-5):
     return 2.0 * log(x, eps)
 
 
-"""
-
-Calculate quaternions from other rotations.
-
-"""
+#############################################
+# Calculate quaternions from other rotations.
+#############################################
 
 # Calculate quaternions from axis angles.
 def from_angle_axis(angle, axis):
@@ -243,6 +253,12 @@ def from_angle_axis(angle, axis):
     s = np.sin(angle / 2.0)[..., None]
     q = np.concatenate([c, s * axis], axis=-1)
     return q
+
+# Calculate quaternions from axis-angle.
+def from_axis_angle(rots):
+    angle = np.linalg.norm(rots, axis=-1)
+    axis = rots / angle[...,None]
+    return from_angle_axis(angle, axis)
 
 # Calculate quaternions from euler angles.
 def from_euler(e, order='zyx'):

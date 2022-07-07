@@ -18,18 +18,19 @@ To install from PyPi simply run:
 ## How to use?
 After downloads all requirements, you can use smpl2bvh like this:
 ```python
-    python smpl2bvh.py --gender MALE --poses data/poses.npz --fps 30 --output data/demo.bvh
+    python smpl2bvh.py --gender MALE --poses ${PATH_TO_Y0UR_INPUT} --fps 60 --output ${PATH_TO_SAVE} --mirror
 ```
 
 `poses` is an `.npz` file or `.pkl` file.  
-`npz` file must contain `rotations` and `trans` as keys.  
+`.npz` file must contain `rotations` and `trans` as keys.  
 `rotations` value is an np.array consisting of [fnum, 24, 3] and `trans` value is the root transition consisting of [fnum, 3]
 (fnum means frame number).  
 
-`pkl` file must contain `smpl_poses` and `smpl_scaling` and `smpl_trans` as keys.  
+`.pkl` file must contain `smpl_poses` and `smpl_scaling` and `smpl_trans` as keys.  
 `smpl_poses` value is an np.array consisting of [fnum, 72] and `smpl_scaling` value is the scaling parameter. `smpl_trans` value is the root transition consisting of [fnum, 3].  
 The format of `pkl` file is the same as [AIST++](https://google.github.io/aistplusplus_dataset/) dataset.  
-You can find bvh file as `--output`.  
+If you check `--mirror` as an argument, the mirrored motion is also saved.  
+After processing, you can find bvh file as `--output`.  
 For more information, please refer to `smpl2bvh.py`.  
 
 ## Reference
