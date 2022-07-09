@@ -2,6 +2,7 @@
 This repository contains an example script to convert from a SMPL model to a bvh file.
 
 <img src="gif/aistpp.gif" align="center"> <br>
+The left side of the figure shows the SMPL grand truth and the right side shows the bvh data.
 
 ## Notification
 This code is MIT licensed, but SMPL requires a separate license.  

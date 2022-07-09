@@ -13,9 +13,9 @@ def parse_args():
     parser.add_argument("--model_type", type=str, default="smpl", choices=["smpl", "smplx"])
     parser.add_argument("--gender", type=str, default="MALE", choices=["MALE", "FEMALE", "NEUTRAL"])
     parser.add_argument("--num_betas", type=int, default=10, choices=[10, 300])
-    parser.add_argument("--poses", type=str, default="data/gPO_sBM_cAll_d10_mPO2_ch03.pkl")
+    parser.add_argument("--poses", type=str, default="data/gWA_sFM_cAll_d27_mWA5_ch20.pkl")
     parser.add_argument("--fps", type=int, default=60)
-    parser.add_argument("--output", type=str, default="data/gPO_sBM_cAll_d10_mPO2_ch03.bvh")
+    parser.add_argument("--output", type=str, default="data/gWA_sFM_cAll_d27_mWA5_ch20.bvh")
     parser.add_argument("--mirror", action="store_true")
     return parser.parse_args()
 
@@ -94,6 +94,7 @@ def smpl2bvh(model_path:str, poses:str, output:str, mirror:bool,
     root_offset = rest_pose[0]
     offsets = rest_pose - rest_pose[parents]
     offsets[0] = root_offset
+    offsets *= 100
     
     scaling = None
     
@@ -123,7 +124,7 @@ def smpl2bvh(model_path:str, poses:str, output:str, mirror:bool,
     order = "zyx"
     pos = offsets[None].repeat(len(rots), axis=0)
     positions = pos.copy()
-    positions[:,0] += trans
+    positions[:,0] += trans * 100
     rotations = np.degrees(quat.to_euler(rots, order=order))
     
     bvh_data ={
@@ -135,6 +136,9 @@ def smpl2bvh(model_path:str, poses:str, output:str, mirror:bool,
         "order": order,
         "frametime": 1 / fps,
     }
+    
+    if not output.endswith(".bvh"):
+        output = output + ".bvh"
     
     bvh.save(output, bvh_data)
     
