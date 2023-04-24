@@ -3,6 +3,7 @@ This repository contains an example script to convert from a SMPL model to a bvh
 
 <img src="gif/aistpp.gif" align="center"> <br>
 The left side of the figure shows the SMPL grand truth and the right side shows the bvh data.
+If you want to convert [AMASS](https://amass.is.tue.mpg.de/) to bvh, please refer to [my another repo](https://github.com/KosukeFukazawa/CharacterAnimationTools#13-load-animation-from-amass).
 
 ## Notification
 This code is MIT licensed, but SMPL requires a separate license.  
